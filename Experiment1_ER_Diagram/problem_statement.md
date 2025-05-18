@@ -51,22 +51,73 @@ Design a database for patient management, appointments, medical records, and bil
 University / Hospital (choose one)
 
 ## ER Diagram:
-![ER Diagram](er_diagram.png)
+![image](https://github.com/user-attachments/assets/449ac0bd-3d77-4303-a81e-fe79649861ca)
+
 
 ## Entities and Attributes:
-- Entity1: Attributes
-- Entity2: Attributes
+
+Entities and their attributes:
+
+1. Doctor – Name, Address, Specialization, Qualification
+
+2. Patient – Details
+
+3. Treat – Date, Disease, Treatment (links Doctor and Patient)
+
+4. Log – Date (linked to Patient)
+
+5. Report – Linked to Log
+
+6. Test – Type, Description (linked to Report)
 ...
 
 ## Relationships and Constraints:
-- Relationship1 (Cardinality, Participation)
-- Relationship2 (Cardinality, Participation)
+
+## RELATIONSHIP:
+
+1.Doctor–Patient have a many-to-many relationship through Treat, with attributes: Date, Disease, Treatment.
+
+2.Patient–Log has a one-to-many relationship; a patient can have multiple logs.
+
+3.Log–Report is one-to-one; each log links to one report.
+
+4.Report–Test is one-to-one; each report is associated with one test.
+
+
+## CONSTRAINTS:
+
+1.A doctor can treat many patients, and vice versa.
+
+2.Each patient can have multiple logs.
+
+3.Each report must be linked to one test.
 ...
 
 ## Extension (Prerequisite / Billing):
-- Explain how you modeled prerequisites or billing.
+
+## Prerequisite:
+This is a recursive relationship within the Test entity, where one test may require another test to be done first. It ensures proper sequencing of medical tests. For example, an advanced test might need a basic test as a prerequisite. This forms a one-to-many relationship, as one test can have multiple prerequisites.
+
+
+## Billing:
+The Billing entity is used to manage financial records related to a patient’s treatments or tests. It is associated with either Patient or Report. It includes attributes like Bill ID, Amount, Date, and Payment Status. A single patient can have multiple bills, forming a one-to-many relationship. This helps in tracking payment details and generating invoices.
 
 ## Design Choices:
-Brief explanation of why you chose certain entities, relationships, and assumptions
+
+1.The design follows a real-world healthcare model to manage doctor-patient interactions, treatments, tests, and billing.
+
+2.Entities like Doctor, Patient, Test, and Billing represent key components of a hospital system.
+
+3.Treat is used as an associative entity to handle the many-to-many relationship between doctors and patients with treatment details.
+
+4.Log and Report capture patient history and test outcomes.
+
+5.A recursive relationship in Test handles prerequisites.
+
+6.Billing ensures financial tracking.
+
+This design supports scalability, data consistency, and efficient patient management.
 
 ## RESULT
+
+ Thus, the SQL queries to implement ER Diagram using hospital management have been executed successfully
